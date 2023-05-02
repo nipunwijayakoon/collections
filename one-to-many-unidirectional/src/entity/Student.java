@@ -1,8 +1,7 @@
 package entity;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "student_table")
 public class Student {
@@ -11,29 +10,25 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_id")
     private long studentId;
-
     private String studentName;
 
-    //---------------mapping----------
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name="laptop_id")
-    private Laptop laptop;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Laptop> laptops;
 
-    //---------------mapping-----------
     public Student(long studentId, String studentName) {
         this.studentId = studentId;
         this.studentName = studentName;
     }
 
-    public Laptop getLaptop() {
-        return laptop;
-    }
-
-    public void setLaptop(Laptop laptop) {
-        this.laptop = laptop;
-    }
-
     public Student() {
+    }
+
+    public List<Laptop> getLaptop() {
+        return laptops;
+    }
+
+    public void setLaptop(List<Laptop> laptops) {
+        this.laptops = laptops;
     }
 
     public long getStudentId() {
