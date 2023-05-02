@@ -1,5 +1,7 @@
 package entity;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 @Entity(name = "student_table")
@@ -13,7 +15,7 @@ public class Student {
     private String studentName;
 
     //---------------mapping----------
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "laptop_id")
     private Laptop laptop;
 
